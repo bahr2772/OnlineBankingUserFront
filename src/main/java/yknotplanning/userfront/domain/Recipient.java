@@ -1,12 +1,19 @@
 package yknotplanning.userfront.domain;
 
-/**
- * Created by bahr2772 on 12/8/16.
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Recipient {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
@@ -14,8 +21,10 @@ public class Recipient {
     private String accountNumber;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
-
 
     public Long getId() {
         return id;
@@ -57,14 +66,6 @@ public class Recipient {
         this.accountNumber = accountNumber;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public User getUser() {
         return user;
     }
@@ -72,4 +73,13 @@ public class Recipient {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
+
